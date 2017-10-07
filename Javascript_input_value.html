@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!--
+	<link rel="shortcut icon" href="assets/ico/favicon.png">
+	-->
+
+    <title>Oleg Kuo's_Boostrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="assets/css/main.css" rel="stylesheet">
+    
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
+
+	<!--MySelf-->
+    <link href="assets/css/doc.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="assets/js/html5shiv.js"></script>
+      <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+	
+    <div class="container col-md-6">
+		<div class="row countB col-md-12" id="showCount2"></div>
+		<div id="state1" class="row state1 countA col-md-12"></div><div class="row countA col-md-12" id="showCount">0</div>
+		<div class="row col-md-6 column ">
+		  <input type="button" value="1" ></input>
+		  <input type="button" value="2" ></input>
+		  <input type="button" value="3" ></input>
+		  <input type="button" value="4" ></input>
+		  <input type="button" value="5" ></input>
+		  <input type="button" value="6" ></input>
+		  <input type="button" value="7" ></input>
+		  <input type="button" value="8" ></input>
+		  <input type="button" value="9" ></input>
+		  <input type="button" value="0" ></input>
+    	</div>
+		<div class="row col-md-6 column ">
+		  <input type="button" value="+" ></input>
+		  <input type="button" value="-" ></input>
+		  <input type="button" value="*" ></input>
+		  <input type="button" value="/" ></input>
+		  <input type="button" value="C" ></input>
+		  <input type="button" value="=" ></input>
+		</div>
+	</div>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+	window.onload=function(){
+	//匿名函數
+	
+		var aBtn=document.getElementsByTagName('input');
+		
+		//將input標籤儲存成變數
+		var i = 0;
+		var intNum1 = '';
+		var intNum2 = '';
+		var countWay = '+' ;
+		
+		for(i=0;i<aBtn.length;i++){
+			
+			aBtn[i].style.width='100px';
+			aBtn[i].style.height='50px';
+		//以for迴圈將所有input標籤都附上效果
+			aBtn[i].onclick=function (){
+			//在這回圈上進行onclick指令時
+				if (this.value == 'C'){
+					intNum1 = '';
+					intNum2 = '';
+					document.getElementById('showCount').innerHTML=0;
+					document.getElementById('showCount2').innerHTML=intNum2;
+					document.getElementById('state1').style.display="none";
+				}else if((this.value == '=' && countWay == '+')){
+					document.getElementById('showCount').innerHTML=( parseInt(intNum1) + parseInt(intNum2)); 
+					intNum2 = '';
+					intNum1 = '';
+					document.getElementById('showCount2').innerHTML=intNum2;
+					document.getElementById('state1').style.display="none";
+					//用等號計算兩個變數的值,但只能用加法
+				} else if(this.value == '=' && countWay == '-' ){ 
+				//如果A是數字則進行以下動作
+					document.getElementById('showCount').innerHTML=( parseInt(intNum2) - parseInt(intNum1));
+					intNum2 = '';
+					intNum1 = '';
+					document.getElementById('showCount2').innerHTML=intNum2;
+					document.getElementById('state1').style.display="none";
+				} else if(this.value == '=' && countWay == '*' ){ 
+					document.getElementById('showCount').innerHTML=( parseInt(intNum2) * parseInt(intNum1));
+					intNum2 = '';
+					intNum1 = '';
+					document.getElementById('showCount2').innerHTML=intNum2;
+					document.getElementById('state1').style.display="none";
+				} else if(this.value == '=' && countWay == '/' ){ 
+					document.getElementById('showCount').innerHTML=( parseInt(intNum2) / parseInt(intNum1));
+					intNum2 = '';
+					intNum1 = '';
+					document.getElementById('showCount2').innerHTML=intNum2;
+					document.getElementById('state1').style.display="none";
+				} else if(!isNaN(this.value)){ 
+					intNum1 = intNum1 + this.value;
+					//附上的效果是當點擊時將值寫入id
+					document.getElementById('showCount').innerHTML=intNum1;
+				} else	{
+				//否則跳B並將A刷新
+					countWay = this.value ;
+					//alert(countWay);
+					document.getElementById('state1').style.display="block";
+					document.getElementById('state1').innerHTML=countWay;
+					intNum2 = intNum1 ;
+					document.getElementById('showCount2').style.display="block";
+					document.getElementById('showCount2').innerHTML=intNum2;
+					intNum1 = '';
+					document.getElementById('showCount').innerHTML=0;
+				}
+			}
+			
+		}
+	}
+	
+	</script>    
+    
+  </body>
+</html>
